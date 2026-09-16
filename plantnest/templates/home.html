@@ -1,0 +1,79 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PlantNest | Indoor Plants</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">🌱 PlantNest</div>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="#">Plants</a>
+        <a href="#">Cart 🛒</a>
+        <a href="#">Login</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Bring Nature Home 🌿</h1>
+
+        <p>
+          Discover beautiful indoor plants that make your space feel fresh and
+          alive.
+        </p>
+
+        <a href="#plants" class="hero-button"> Explore Plants </a>
+      </div>
+    </section>
+
+    <section class="plants-section" id="plants">
+      <h2>Our Indoor Plants</h2>
+
+      <p class="section-description">
+        Easy-to-care plants for your home and workspace.
+      </p>
+
+      <div class="product-grid">
+        {% for product in products %}
+
+        <a href="{% url 'product_detail' product.id %}" class="product-card">
+          <div class="plant-image">🌿</div>
+
+          <div class="product-info">
+            <a href="{% url 'product_detail' product.id %}">
+              <h3>{{ product.name }}</h3>
+            </a>
+
+            <p class="description">{{ product.description }}</p>
+
+            <div class="product-bottom">
+              <span class="price"> ₹{{ product.price }} </span>
+
+              <button>Add to Cart</button>
+            </div>
+          </div>
+        </a>
+
+        {% empty %}
+
+        <p>No plants available.</p>
+
+        {% endfor %}
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 PlantNest. Built with Django.</p>
+    </footer>
+  </body>
+</html>

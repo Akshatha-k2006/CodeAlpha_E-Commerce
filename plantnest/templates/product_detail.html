@@ -1,0 +1,82 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{ product.name }} | PlantNest</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">🌱 PlantNest</div>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#plants">Plants</a>
+        <a href="#">Cart 🛒</a>
+        <a href="#">Login</a>
+      </nav>
+    </header>
+
+    <main class="product-detail">
+      <div class="detail-image">🌿</div>
+
+      <div class="detail-info">
+        <p class="detail-category">Indoor Plant</p>
+
+        <h1>{{ product.name }}</h1>
+
+        <p class="detail-price">₹{{ product.price }}</p>
+
+        <p class="detail-description">{{ product.description }}</p>
+
+        <div class="plant-details">
+          <div>
+            <strong>☀ Light</strong>
+            <span>{{ product.light_requirement }}</span>
+          </div>
+
+          <div>
+            <strong>💧 Water</strong>
+            <span>{{ product.water_requirement }}</span>
+          </div>
+
+          <div>
+            <strong>⭐ Difficulty</strong>
+            <span>{{ product.difficulty }}</span>
+          </div>
+
+          <div>
+            <strong>📏 Size</strong>
+            <span>{{ product.size }}</span>
+          </div>
+        </div>
+
+        <p class="stock">
+          {% if product.stock > 0 %} ✓ In Stock ({{ product.stock }} available)
+          {% else %} ✕ Out of Stock {% endif %}
+        </p>
+
+        {% if product.stock > 0 %}
+
+        <button class="add-cart-button">Add to Cart 🛒</button>
+
+        {% else %}
+
+        <button class="add-cart-button" disabled>Out of Stock</button>
+
+        {% endif %}
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 PlantNest. Built with Django.</p>
+    </footer>
+  </body>
+</html>
