@@ -1,0 +1,88 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Order Confirmed | PlantNest</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">🌱 PlantNest</div>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#plants">Plants</a>
+        <a href="{% url 'cart' %}">Cart 🛒</a>
+
+        {% if user.is_authenticated %}
+        <span>Hi, {{ user.username }} 👋</span>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <main class="confirmation-page">
+      <div class="confirmation-card">
+        <div class="success-icon">✓</div>
+
+        <h1>Order Confirmed! 🎉</h1>
+
+        <p class="confirmation-message">
+          Thank you for shopping with PlantNest. Your order has been
+          successfully placed.
+        </p>
+
+        <div class="order-info">
+          <h2>Order Details</h2>
+
+          <div class="summary-row">
+            <span>Order ID</span>
+            <strong>#{{ order.id }}</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Customer</span>
+            <span>{{ order.full_name }}</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Payment</span>
+            <span>{{ order.payment_method }}</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Total Amount</span>
+            <strong>₹{{ order.total_amount }}</strong>
+          </div>
+        </div>
+
+        <div class="delivery-info">
+          <h2>Delivery Address 📦</h2>
+
+          <p>{{ order.full_name }}</p>
+          <p>{{ order.address }}</p>
+          <p>{{ order.city }}, {{ order.state }}</p>
+          <p>PIN: {{ order.pincode }}</p>
+        </div>
+
+        <div class="confirmation-buttons">
+          <a href="/" class="checkout-button"> Continue Shopping 🌱 </a>
+
+          <a href="{% url 'cart' %}" class="secondary-button"> View Cart 🛒 </a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 PlantNest 🌱 | Bringing nature closer to you</p>
+    </footer>
+  </body>
+</html>

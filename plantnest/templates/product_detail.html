@@ -19,13 +19,22 @@
       <nav>
         <a href="/">Home</a>
         <a href="/#plants">Plants</a>
-        <a href="#">Cart 🛒</a>
-        <a href="#">Login</a>
+        <a href="{% url 'cart' %}">Cart 🛒</a>
+        {% if user.is_authenticated %}
+        <span>Hi, {{ user.username }} 👋</span>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
       </nav>
     </header>
 
     <main class="product-detail">
-      <div class="detail-image">🌿</div>
+      <div class="plant-image">
+        {% if product.image %}
+        <img src="{{ product.image }}" alt="{{ product.name }}" />
+        {% else %} 🌿 {% endif %}
+      </div>
 
       <div class="detail-info">
         <p class="detail-category">Indoor Plant</p>
@@ -65,7 +74,9 @@
 
         {% if product.stock > 0 %}
 
-        <button class="add-cart-button">Add to Cart 🛒</button>
+        <a href="{% url 'add_to_cart' product.id %}" class="add-cart-button">
+          Add to Cart 🛒
+        </a>
 
         {% else %}
 

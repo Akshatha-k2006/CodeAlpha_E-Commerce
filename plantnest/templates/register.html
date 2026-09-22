@@ -1,0 +1,75 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Create Account | PlantNest</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">🌱 PlantNest</div>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#plants">Plants</a>
+        <a href="{% url 'cart' %}">Cart 🛒</a>
+        <a href="{% url 'register' %}">Register</a>
+      </nav>
+    </header>
+
+    <main class="auth-page">
+      <div class="auth-container">
+        <h1>Create Your Account 🌱</h1>
+
+        <p class="auth-subtitle">
+          Join PlantNest and start bringing nature home.
+        </p>
+
+        {% if error %}
+        <p class="auth-error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+          {% csrf_token %}
+
+          <label for="username"> Username </label>
+
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            required
+          />
+
+          <label for="password"> Password </label>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+
+          <button type="submit">Create Account</button>
+        </form>
+
+        <p class="auth-footer">
+          Already have an account?
+          <a href="#"> Login </a>
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 PlantNest. Built with Django.</p>
+    </footer>
+  </body>
+</html>

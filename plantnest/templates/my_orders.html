@@ -1,0 +1,92 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>My Orders | PlantNest</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">🌱 PlantNest</div>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#plants">Plants</a>
+        <a href="{% url 'cart' %}">Cart 🛒</a>
+        <a href="{% url 'my_orders' %}">My Orders 📦</a>
+
+        {% if user.is_authenticated %}
+        <span>Hi, {{ user.username }} 👋</span>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <main class="orders-page">
+      <h1>My Orders 📦</h1>
+
+      {% if orders %} {% for order in orders %}
+
+      <div class="order-card">
+        <div class="order-header">
+          <div>
+            <h2>Order #{{ order.id }}</h2>
+            <p>Placed on {{ order.created_at|date:"d M Y, h:i A" }}</p>
+          </div>
+
+          <strong> ₹{{ order.total_amount }} </strong>
+        </div>
+
+        <div class="order-details">
+          <p>
+            <strong>Payment:</strong>
+            {{ order.payment_method }}
+          </p>
+
+          <p>
+            <strong>Delivery to:</strong>
+            {{ order.city }}, {{ order.state }} - {{ order.pincode }}
+          </p>
+        </div>
+
+        <h3>Items</h3>
+
+        <div class="order-items">
+          {% for item in order.items.all %}
+
+          <div class="order-item">
+            <span> {{ item.product.name }} </span>
+
+            <span> {{ item.quantity }} × ₹{{ item.price }} </span>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+
+      {% endfor %} {% else %}
+
+      <div class="empty-orders">
+        <h2>No orders yet 🌱</h2>
+
+        <p>You haven't placed any orders with PlantNest yet.</p>
+
+        <a href="/" class="checkout-button"> Start Shopping 🌿 </a>
+      </div>
+
+      {% endif %}
+    </main>
+
+    <footer>
+      <p>© 2026 PlantNest 🌱 | Bringing nature closer to you</p>
+    </footer>
+  </body>
+</html>

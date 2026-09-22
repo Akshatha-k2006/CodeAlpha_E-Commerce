@@ -1,0 +1,132 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Checkout | PlantNest</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">🌱 PlantNest</div>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#plants">Plants</a>
+        <a href="{% url 'cart' %}">Cart 🛒</a>
+
+        {% if user.is_authenticated %}
+        <span>Hi, {{ user.username }} 👋</span>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <main class="checkout-page">
+      <h1>Checkout 🌿</h1>
+
+      <div class="checkout-container">
+        <!-- Delivery Details -->
+
+        <div class="checkout-form">
+          <h2>Delivery Details</h2>
+
+          <form method="POST">
+            {% csrf_token %}
+
+            <label for="full_name">Full Name</label>
+            <input type="text" id="full_name" name="full_name" required />
+
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="4" required></textarea>
+
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required />
+
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" required />
+
+            <label for="pincode">PIN Code</label>
+            <input
+              type="text"
+              id="pincode"
+              name="pincode"
+              maxlength="6"
+              required
+            />
+
+            <h2>Payment Method</h2>
+
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="COD" required />
+              Cash on Delivery
+            </label>
+
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="UPI" />
+              UPI
+            </label>
+
+            <button type="submit" class="checkout-button">
+              Place Order 🌱
+            </button>
+          </form>
+        </div>
+
+        <!-- Order Summary -->
+
+        <div class="checkout-summary">
+          <h2>Order Summary</h2>
+
+          {% for item in cart_items %}
+
+          <div class="checkout-item">
+            <div>
+              <strong>{{ item.product.name }}</strong>
+              <p>Quantity: {{ item.quantity }}</p>
+            </div>
+
+            <span> ₹{{ item.subtotal }} </span>
+          </div>
+
+          {% endfor %}
+
+          <hr />
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>₹{{ subtotal }}</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Delivery</span>
+
+            {% if delivery == 0 %}
+            <span>FREE</span>
+            {% else %}
+            <span>₹{{ delivery }}</span>
+            {% endif %}
+          </div>
+
+          <hr />
+
+          <div class="summary-total">
+            <span>Total</span>
+            <span>₹{{ total }}</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 PlantNest 🌱 | Bringing nature closer to you</p>
+    </footer>
+  </body>
+</html>

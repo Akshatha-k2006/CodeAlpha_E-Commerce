@@ -1,0 +1,144 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Shopping Cart | PlantNest</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <header class="navbar">
+      <div class="logo">🌱 PlantNest</div>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#plants">Plants</a>
+        <a href="{% url 'cart' %}">Cart 🛒</a>
+        <a href="#">Login</a>
+      </nav>
+    </header>
+
+    <!-- Cart Section -->
+    <main class="cart-page">
+      <h1>Your Shopping Cart 🛒</h1>
+
+      {% if cart_items %}
+
+      <div class="cart-container">
+        <!-- Cart Items -->
+        <div class="cart-items">
+          {% for item in cart_items %}
+
+          <div class="cart-item">
+            <div class="cart-item-image">🌿</div>
+
+            <div class="cart-item-info">
+              <h2>{{ item.product.name }}</h2>
+
+              <p>₹{{ item.product.price }} each</p>
+
+              <form
+                method="POST"
+                action="{% url 'update_cart' item.product.id %}"
+                class="quantity-form"
+              >
+                {% csrf_token %}
+
+                <label>Quantity:</label>
+
+                <input
+                  type="number"
+                  name="quantity"
+                  value="{{ item.quantity }}"
+                  min="1"
+                  max="{{ item.product.stock }}"
+                />
+
+                <button type="submit">Update</button>
+              </form>
+
+              <strong> Subtotal: ₹{{ item.subtotal }} </strong>
+
+              <a
+                href="{% url 'remove_from_cart' item.product.id %}"
+                class="remove-button"
+              >
+                Remove 🗑️
+              </a>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-summary">
+          <h2>Order Summary</h2>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>₹{{ subtotal }}</span>
+          </div>
+
+          {% if delivery == 0 %}
+
+          <div class="summary-row">
+            <span>Delivery</span>
+            <span>FREE</span>
+          </div>
+
+          <p class="delivery-message">🎉 You qualify for free delivery!</p>
+
+          {% else %}
+
+          <div class="summary-row">
+            <span>Delivery</span>
+            <span>₹{{ delivery }}</span>
+          </div>
+
+          <p class="delivery-message">
+            Add ₹{{ free_delivery_message }} more for free delivery.
+          </p>
+
+          {% endif %}
+
+          <hr />
+
+          <div class="summary-total">
+            <span>Total</span>
+            <span>₹{{ total }}</span>
+          </div>
+
+          <a href="{% url 'checkout' %}" class="checkout-button">
+            Proceed to Checkout
+          </a>
+        </div>
+      </div>
+
+      {% else %}
+
+      <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+
+        <h2>Your cart is empty</h2>
+
+        <p>Looks like you haven't added any plants yet.</p>
+
+        <a href="/#plants" class="continue-shopping"> Explore Plants 🌿 </a>
+      </div>
+
+      {% endif %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 PlantNest. Built with Django.</p>
+    </footer>
+  </body>
+</html>
