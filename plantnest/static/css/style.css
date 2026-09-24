@@ -181,6 +181,9 @@ body {
 
 .product-info {
   padding: 20px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .product-info h3 {
@@ -191,16 +194,27 @@ body {
   margin-bottom: 10px;
 }
 
+.product-info h3 a {
+  color: #26352a;
+  text-decoration: none;
+}
+
+.product-info h3 a:hover {
+  color: #3f7048;
+}
+
 .description {
   color: #657267;
-
   font-size: 14px;
-
   line-height: 1.6;
-
   margin-bottom: 20px;
 
-  min-height: 67px;
+  min-height: 70px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product-bottom {
@@ -584,7 +598,7 @@ footer {
 }
 
 .plant-image {
-  width: 200%;
+  width: 100%;
   height: 240px;
   overflow: hidden;
 
@@ -593,15 +607,106 @@ footer {
   justify-content: center;
 
   background-color: #edf5eb;
+  padding: 10px;
 }
 
 .plant-image img {
-  width: 200%;
-  height: 150%;
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
+  transition: transform 0.4s ease;
 }
 
 .product-card:hover .plant-image img {
   transform: scale(1.05);
+}
+
+/* Search Bar */
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 14px 18px;
+
+  border: 1px solid #d5e2d2;
+  border-radius: 8px;
+
+  font-size: 15px;
+  outline: none;
+}
+
+.search-form input:focus {
+  border-color: #3f7048;
+  box-shadow: 0 0 5px rgba(63, 112, 72, 0.2);
+}
+
+.search-form button {
+  padding: 14px 22px;
+
+  background-color: #3f7048;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #315c39;
+}
+
+.clear-search {
+  color: #3f7048;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.clear-search:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Search */
+
+@media (max-width: 600px) {
+  .search-form {
+    flex-wrap: wrap;
+  }
+
+  .search-form input {
+    min-width: 100%;
+  }
+}
+
+/* Difficulty Dropdown */
+
+.search-form select {
+  padding: 14px 18px;
+
+  border: 1px solid #d5e2d2;
+  border-radius: 8px;
+
+  background-color: white;
+  color: #26352a;
+
+  font-size: 15px;
+  cursor: pointer;
+  outline: none;
+}
+
+.search-form select:focus {
+  border-color: #3f7048;
+  box-shadow: 0 0 5px rgba(63, 112, 72, 0.2);
 }

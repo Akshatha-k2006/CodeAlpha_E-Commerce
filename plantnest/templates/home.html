@@ -49,6 +49,65 @@
         Easy-to-care plants for your home and workspace.
       </p>
 
+      <!-- Search Bar -->
+      <form method="GET" action="{% url 'home' %}" class="search-form">
+        <!-- Search by plant name -->
+        <input
+          type="text"
+          name="q"
+          placeholder="Search indoor plants..."
+          value="{{ search_query }}"
+        />
+
+        <!-- Filter by difficulty -->
+        <select name="difficulty">
+          <option value="">All Difficulties</option>
+
+          <option
+            value="Easy"
+            {%
+            if
+            selected_difficulty=""
+            ="Easy"
+            %}selected{%
+            endif
+            %}
+          >
+            Easy
+          </option>
+
+          <option
+            value="Very Easy"
+            {%
+            if
+            selected_difficulty=""
+            ="Very Easy"
+            %}selected{%
+            endif
+            %}
+          >
+            Very Easy
+          </option>
+
+          <option
+            value="Moderate"
+            {%
+            if
+            selected_difficulty=""
+            ="Moderate"
+            %}selected{%
+            endif
+            %}
+          >
+            Moderate
+          </option>
+        </select>
+
+        <button type="submit">Search</button>
+
+        <a href="{% url 'home' %}" class="clear-search"> Clear </a>
+      </form>
+
       <div class="product-grid">
         {% for product in products %}
 
@@ -66,6 +125,7 @@
             </a>
 
             <p class="description">{{ product.description }}</p>
+            //product description
 
             <div class="product-bottom">
               <span class="price"> ₹{{ product.price }} </span>

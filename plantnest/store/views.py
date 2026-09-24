@@ -8,9 +8,47 @@ from .models import Product,Order,OrderItem
 def home(request):
     products = Product.objects.all()
 
+    search_query = request.GET.get('q', '')
+    difficulty = request.GET.get('difficulty', '')
+
+
+    if search_query:
+        products = products.filter(
+            name__icontains=search_query
+        )
+
     return render(request, 'home.html', {
-        'products': products
+        'products': products,
+        'search_query': search_query,
     })
+
+    if difficulty:
+        products = products.filter(
+            difficulty=difficulty
+        )
+
+    return render(request, 'home.html', {
+        'products': products,
+        'search_query': search_query,
+        'selected_difficulty': difficulty,
+    })
+
+    if sort_by == 'price_low':
+        products = products.order_by('price')
+
+    elif sort_by == 'price_high':
+        products = products.order_by('-price')
+
+    elif sort_by == 'name':
+        products = products.order_by('name')
+
+    return render(request, 'home.html', {
+        'products': products,
+        'search_query': search_query,
+        'selected_difficulty': difficulty,
+        'selected_sort': sort_by,
+    })
+
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
@@ -24,14 +62,20 @@ def add_to_cart(request, product_id):
 
     product_id = str(product_id)
 
-    if product_id in cart:
+    if request.GET.get('buy_now') == '1':
+        cart = {
+            product_id: 1
+            }
+    elif product_id in cart:
         if cart[product_id] < product.stock:
             cart[product_id] += 1
+
     else:
         cart[product_id] = 1
+        
 
-    request.session['cart'] = cart
-    request.session.modified = True
+    if request.GET.get('buy_now') == '1':
+        return redirect('checkout')
 
     return redirect('cart')
 
