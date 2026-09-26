@@ -42,6 +42,7 @@ def home(request):
     elif sort_by == 'name':
         products = products.order_by('name')
 
+
     return render(request, 'home.html', {
         'products': products,
         'search_query': search_query,
@@ -49,12 +50,7 @@ def home(request):
         'selected_sort': sort_by,
     })
 
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
 
-    return render(request, 'product_detail.html', {
-        'product': product
-    })
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
@@ -295,41 +291,10 @@ def my_orders(request):
     return render(request, 'my_orders.html', {
         'orders': orders
     })
-
-def add_to_wishlist(request, product_id):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
+def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
-    Wishlist.objects.get_or_create(
-        user=request.user,
-        product=product
-    )
-
-    return redirect('wishlist')
-
-
-def wishlist(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
-    wishlist_items = Wishlist.objects.filter(
-        user=request.user
-    ).select_related('product')
-
-    return render(request, 'wishlist.html', {
-        'wishlist_items': wishlist_items
+    return render(request, 'product_detail.html', {
+        'product': product,
     })
 
-
-def remove_from_wishlist(request, product_id):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
-    Wishlist.objects.filter(
-        user=request.user,
-        product_id=product_id
-    ).delete()
-
-    return redirect('wishlist')
