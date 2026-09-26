@@ -83,6 +83,13 @@
         <button class="add-cart-button" disabled>Out of Stock</button>
 
         {% endif %}
+
+        <a
+          href="{% url 'add_to_wishlist' product.id %}"
+          class="wishlist-button"
+        >
+          ❤️ Add to Wishlist
+        </a>
       </div>
     </main>
 

@@ -12,8 +12,6 @@ body {
 
 /* Navbar */
 
-/* Navbar */
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -56,10 +54,8 @@ body {
 
 /* Hero */
 
-/* Hero */
-
 .hero {
-  min-height: 460px;
+  min-height: 400px;
 
   display: flex;
   align-items: center;
@@ -121,7 +117,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* Products */
 /* Products */
 
 .plants-section {
@@ -709,4 +704,28 @@ footer {
 .search-form select:focus {
   border-color: #3f7048;
   box-shadow: 0 0 5px rgba(63, 112, 72, 0.2);
+}
+
+/* Wishlist Button */
+
+.wishlist-button {
+  display: inline-block;
+  padding: 12px 24px;
+
+  background-color: #fff0f0;
+  color: #c44b5b;
+
+  border: 1px solid #f2cccc;
+  border-radius: 8px;
+
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.wishlist-button:hover {
+  background-color: #fce0e3;
+  transform: translateY(-2px);
 }

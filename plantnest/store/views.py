@@ -295,3 +295,41 @@ def my_orders(request):
     return render(request, 'my_orders.html', {
         'orders': orders
     })
+
+def add_to_wishlist(request, product_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    product = get_object_or_404(Product, id=product_id)
+
+    Wishlist.objects.get_or_create(
+        user=request.user,
+        product=product
+    )
+
+    return redirect('wishlist')
+
+
+def wishlist(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    wishlist_items = Wishlist.objects.filter(
+        user=request.user
+    ).select_related('product')
+
+    return render(request, 'wishlist.html', {
+        'wishlist_items': wishlist_items
+    })
+
+
+def remove_from_wishlist(request, product_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    Wishlist.objects.filter(
+        user=request.user,
+        product_id=product_id
+    ).delete()
+
+    return redirect('wishlist')

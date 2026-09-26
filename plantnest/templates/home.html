@@ -31,11 +31,11 @@
 
     <section class="hero">
       <div class="hero-content">
-        <h1>Bring Nature Home 🌿</h1>
+        <h1>Bring Nature Home From Plantnest🌿</h1>
 
         <p>
           Discover beautiful indoor plants that make your space feel fresh and
-          alive.
+          alive, Easy to care plants without much work good for any region.
         </p>
 
         <a href="#plants" class="hero-button"> Explore Plants </a>
@@ -100,6 +100,50 @@
             %}
           >
             Moderate
+          </option>
+        </select>
+
+        <!-- Sort products -->
+        <select name="sort">
+          <option value="">Sort By</option>
+
+          <option
+            value="price_low"
+            {%
+            if
+            selected_sort=""
+            ="price_low"
+            %}selected{%
+            endif
+            %}
+          >
+            Price: Low to High
+          </option>
+
+          <option
+            value="price_high"
+            {%
+            if
+            selected_sort=""
+            ="price_high"
+            %}selected{%
+            endif
+            %}
+          >
+            Price: High to Low
+          </option>
+
+          <option
+            value="name"
+            {%
+            if
+            selected_sort=""
+            ="name"
+            %}selected{%
+            endif
+            %}
+          >
+            Name: A to Z
           </option>
         </select>
 
