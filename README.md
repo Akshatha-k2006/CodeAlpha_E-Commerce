@@ -8,24 +8,24 @@ The project is built to explore and strengthen practical skills in **HTML, CSS, 
 
 ---
 
-## ✨ Features
+##  Features
 
-* 🌱 Browse indoor plants
-* 🔍 Search and explore products
-* 📋 View detailed plant information
-* 🛒 Add products to cart
-* ➕ Increase or decrease product quantity
-* 🗑️ Remove products from cart
-* 👤 User registration and login
-* 📦 Checkout and order processing
-* 🧾 View previous orders
-* 💰 Indian Rupee (₹) pricing
-* 🇮🇳 India-focused delivery details
-* ⚙️ Django admin panel for managing products and orders
+*  Browse indoor plants
+*  Search and explore products
+*  View detailed plant information
+*  Add products to cart
+*  Increase or decrease product quantity
+*  Remove products from cart
+*  User registration and login
+*  Checkout and order processing
+*  View previous orders
+*  Indian Rupee (₹) pricing
+* 🇮 India-focused delivery details
+*  Django admin panel for managing products and orders
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 
@@ -129,7 +129,6 @@ PlantNest/
 
 ```bash
 git clone <your-repository-url>
-cd PlantNest
 ```
 
 ### 2. Create a virtual environment
@@ -155,6 +154,7 @@ pip install django
 ### 5. Apply migrations
 
 ```bash
+cd PlantNes
 python manage.py migrate
 ```
 
@@ -234,13 +234,13 @@ The main goal of PlantNest is to gain practical experience in:
 
 Possible future additions include:
 
-* 💳 Online payment gateway integration
-* 📧 Order confirmation emails
-* ⭐ Product reviews and ratings
-* ❤️ Wishlist functionality
-* 📍 Order tracking
-* 🔎 Advanced product filtering
-* 📱 Improved mobile experience
+*  Online payment gateway integration
+*  Order confirmation emails
+*  Product reviews and ratings
+*  Wishlist functionality
+*  Order tracking
+*  Advanced product filtering
+*  Improved mobile experience
 
 ---
 
