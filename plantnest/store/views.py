@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
@@ -5,6 +6,8 @@ from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.decorators import login_required
 from django.utils.http import url_has_allowed_host_and_scheme
 from .models import Product,Order,OrderItem
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
 
 def home(request):
@@ -153,22 +156,46 @@ def cart(request):
     })
 
 def register(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.user.is_authenticated:
+        return redirect('home')
 
-        if User.objects.filter(username=username).exists():
+    if request.method == 'POST':
+        username = request.POST.get('username', '').strip()
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '')
+        confirm_password = request.POST.get('confirm_password', '')
+
+        error = None
+
+        if len(username) < 3:
+            error = 'Username must be at least 3 characters.'
+        elif User.objects.filter(username__iexact=username).exists():
+            error = 'Username already exists.'
+        elif len(password) < 6:
+            error = 'Password must be at least 6 characters.'
+        elif password != confirm_password:
+            error = 'Passwords do not match.'
+        elif email:
+            try:
+                validate_email(email)
+            except ValidationError:
+                error = 'Please enter a valid email address.'
+
+        if error:
             return render(request, 'register.html', {
-                'error': 'Username already exists.'
+                'error': error,
+                'username': username,
+                'email': email,
             })
 
         user = User.objects.create_user(
             username=username,
+            email=email,
             password=password
         )
 
         login(request, user)
-
+        messages.success(request, f'Welcome to PlantNest, {user.username}!')
         return redirect('home')
 
     return render(request, 'register.html')
