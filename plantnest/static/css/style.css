@@ -1082,4 +1082,30 @@ footer {
   .order-header {
     flex-direction: column;
   }
+
+  /* ---------- Back links ---------- */
+  .back-bar {
+    width: calc(100% - 48px);
+    max-width: 1180px;
+    margin: 24px auto 0;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: var(--white);
+    color: var(--green-dark);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 999px;
+    box-shadow: 0 2px 0 var(--line);
+    transition: background 0.15s;
+  }
+
+  .back-link:hover {
+    background: var(--mint-soft);
+  }
 }
