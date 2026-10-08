@@ -43,6 +43,7 @@
 
         <form method="POST" class="auth-form">
           {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.GET.next }}" />
 
           <label for="username"> Username </label>
 

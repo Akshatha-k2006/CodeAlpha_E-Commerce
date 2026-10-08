@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
 # Create your views here.
+from django.contrib.auth.decorators import login_required
+from django.utils.http import url_has_allowed_host_and_scheme
 from .models import Product,Order,OrderItem
 
 
@@ -68,6 +70,9 @@ def add_to_cart(request, product_id):
 
     else:
         cart[product_id] = 1
+
+    request.session['cart'] = cart
+    request.session.modified = True
         
 
     if request.GET.get('buy_now') == '1':
@@ -180,7 +185,11 @@ def user_login(request):
         )
 
         if user is not None:
-            login(request, user)
+            next_url = request.POST.get('next') or request.GET.get('next') or ''
+            if next_url and url_has_allowed_host_and_scheme(
+                next_url, allowed_hosts={request.get_host()}
+            ):
+                return redirect(next_url)
             return redirect('home')
 
         return render(request, 'login.html', {
@@ -193,9 +202,9 @@ def user_logout(request):
     logout(request)
     return redirect('home')
 
+
+@login_required
 def checkout(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
 
     cart_data = request.session.get('cart', {})
 
@@ -266,9 +275,9 @@ def checkout(request):
         'total': total,
     })
 
+@login_required
 def order_confirmation(request, order_id):
-    if not request.user.is_authenticated:
-        return redirect('login')
+    
 
     order = get_object_or_404(
         Order,
@@ -280,9 +289,8 @@ def order_confirmation(request, order_id):
         'order': order
     })
 
+@login_required
 def my_orders(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
 
     orders = Order.objects.filter(
         user=request.user
