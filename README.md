@@ -1,6 +1,8 @@
 # CodeAlpha_E-Commerce
-E-Commerce website 
-# 🌿 PlantNest
+
+E-Commerce website
+
+# PlantNest
 
 **PlantNest** is a simple, India-focused e-commerce website dedicated to indoor plants. The platform allows users to browse plants, view detailed product information, add products to a shopping cart, register/login, and place orders.
 
@@ -8,81 +10,81 @@ The project is built to explore and strengthen practical skills in **HTML, CSS, 
 
 ---
 
-## ✨ Features
+## Features
 
-* 🌱 Browse indoor plants
-* 🔍 Search and explore products
-* 📋 View detailed plant information
-* 🛒 Add products to cart
-* ➕ Increase or decrease product quantity
-* 🗑️ Remove products from cart
-* 👤 User registration and login
-* 📦 Checkout and order processing
-* 🧾 View previous orders
-* 💰 Indian Rupee (₹) pricing
-* 🇮🇳 India-focused delivery details
-* ⚙️ Django admin panel for managing products and orders
+- Browse indoor plants
+- Search and explore products
+- View detailed plant information
+- Add products to cart
+- Increase or decrease product quantity
+- Remove products from cart
+- User registration and login
+- Checkout and order processing
+- View previous orders
+- Indian Rupee (₹) pricing
+- 🇮🇳 India-focused delivery details
+- Django admin panel for managing products and orders
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 
-* HTML5
-* CSS3
-* JavaScript
+- HTML5
+- CSS3
+- JavaScript
 
 ### Backend
 
-* Python
-* Django
+- Python
+- Django
 
 ### Database
 
-* SQLite
+- SQLite
 
 ### Development Tools
 
-* Visual Studio Code
-* Git
-* GitHub
+- Visual Studio Code
+- Git
+- GitHub
 
 ---
 
-## 🌱 Product Category
+## Product Category
 
 PlantNest focuses specifically on **indoor plants**.
 
 Example products include:
 
-* Snake Plant
-* Money Plant
-* Peace Lily
-* Spider Plant
-* ZZ Plant
-* Aloe Vera
-* Jade Plant
-* Areca Palm
-* Rubber Plant
-* Lucky Bamboo
+- Snake Plant
+- Money Plant
+- Peace Lily
+- Spider Plant
+- ZZ Plant
+- Aloe Vera
+- Jade Plant
+- Areca Palm
+- Rubber Plant
+- Lucky Bamboo
 
 ---
 
-## 🗄️ Database
+## Database
 
 The application uses SQLite during development.
 
 The main data entities include:
 
-* **Users** – managed using Django Authentication
-* **Products** – plant details, pricing, stock, and other information
-* **Orders** – customer order and delivery information
-* **Order Items** – products and quantities included in each order
+- **Users** – managed using Django Authentication
+- **Products** – plant details, pricing, stock, and other information
+- **Orders** – customer order and delivery information
+- **Order Items** – products and quantities included in each order
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 PlantNest/
@@ -123,13 +125,12 @@ PlantNest/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the repository
 
 ```bash
 git clone <your-repository-url>
-cd PlantNest
 ```
 
 ### 2. Create a virtual environment
@@ -155,6 +156,7 @@ pip install django
 ### 5. Apply migrations
 
 ```bash
+cd plantnest
 python manage.py migrate
 ```
 
@@ -174,9 +176,11 @@ Open the local development server in your browser.
 
 ---
 
-## 🛒 Application Flow
+## Application Flow
 
 ```text
+Login / Register
+  ↓
 Home
   ↓
 Browse Plants
@@ -184,8 +188,6 @@ Browse Plants
 View Product Details
   ↓
 Add to Cart
-  ↓
-Login / Register
   ↓
 Checkout
   ↓
@@ -198,73 +200,70 @@ My Orders
 
 ---
 
-## 💰 India-Focused Shopping
+## India-Focused Shopping
 
 PlantNest is designed specifically for customers in India.
 
 The project uses:
 
-* ₹ INR pricing
-* Indian delivery addresses
-* Indian PIN codes
-* India-focused delivery charges
-* Cash on Delivery / UPI payment selection
+- ₹ INR pricing
+- Indian delivery addresses
+- Indian PIN codes
+- India-focused delivery charges
+- Cash on Delivery / UPI payment selection
 
 > Payment processing is currently designed as part of the project workflow and does not represent a live payment gateway.
 
 ---
 
-## 🎯 Project Goals
+## Project Goals
 
 The main goal of PlantNest is to gain practical experience in:
 
-* Building responsive web interfaces
-* Working with JavaScript interactions
-* Understanding Django's MVT architecture
-* Creating and managing database models
-* Implementing user authentication
-* Managing shopping cart functionality
-* Processing orders
-* Connecting frontend templates with a Django backend
-* Using Git and GitHub for version control
+- Building responsive web interfaces
+- Understanding Django's MVT architecture
+- Creating and managing database models
+- Implementing user authentication
+- Managing shopping cart functionality
+- Processing orders
+- Connecting frontend templates with a Django backend
+- Using Git and GitHub for version control
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
 Possible future additions include:
 
-* 💳 Online payment gateway integration
-* 📧 Order confirmation emails
-* ⭐ Product reviews and ratings
-* ❤️ Wishlist functionality
-* 📍 Order tracking
-* 🔎 Advanced product filtering
-* 📱 Improved mobile experience
+- Online payment gateway integration
+- Order confirmation emails
+- Product reviews and ratings
+- Wishlist functionality
+- Order tracking
+- Advanced product filtering
+- Improved mobile experience
 
 ---
 
-## 📌 Project Status
+## Project Status
 
-**🚧 Currently in development**
+** Currently in development**
 
 PlantNest is being developed as a learning project to build practical full-stack web development skills using Django.
 
 ---
 
-## 👩‍💻 Author
+## Author
 
 **Akshatha K**
 
 B.E. Computer Science & Engineering Student
 
-* GitHub: [Akshatha-K2006](https://github.com/Akshatha-K2006)
-* LinkedIn: [Akshatha K](https://www.linkedin.com/in/akshatha-k-488961334/)
+- GitHub: [Akshatha-K2006](https://github.com/Akshatha-K2006)
+- LinkedIn: [Akshatha K](https://www.linkedin.com/in/akshatha-k-488961334/)
 
 ---
 
-## 📄 License
+## License
 
 This project is created for educational and learning purposes.
-
-
